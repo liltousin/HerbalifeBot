@@ -12,7 +12,7 @@ def sql_connection():
 
 def create_table_users(con):
     cur = con.cursor()
-    cur.execute("")
+    cur.execute("CREATE TABLE users(telegram_id integer PRIMARY KEY, name text, )")
 
 
 def worker():
