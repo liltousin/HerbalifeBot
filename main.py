@@ -1,5 +1,8 @@
+from bot import run_bot
+
+
 def main():
-    print("It's works")
+    run_bot()
 
 
 if __name__ == '__main__':
