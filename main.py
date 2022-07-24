@@ -1,9 +1,15 @@
-from bot import run_bot
+from config import TOKEN
+from aiogram import Dispatcher, Bot, executor, types
 from data_worker import Data
+
+bot = Bot(token=TOKEN)
+dp = Dispatcher(bot)
+
+
+@dp.message_handler(commands='start')
+async def start(message: types.Message):
+    await message.reply('Поехали')
 
 
 if __name__ == '__main__':
-    data = Data()
-    run_bot()
-
-
+    executor.start_polling(dp)
