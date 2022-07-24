@@ -1,9 +1,9 @@
 from bot import run_bot
-from data_worker import worker
+from data_worker import Data
 
 
 if __name__ == '__main__':
-    worker()
+    data = Data()
     run_bot()
 
 
