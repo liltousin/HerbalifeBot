@@ -4,31 +4,27 @@ from sqlite3 import Error
 
 class Data:
     def __init__(self):
-        def create_table_users(con):
-            cur = con.cursor()
-            cur.execute("CREATE TABLE IF NOT EXISTS users(telegram_id integer PRIMARY KEY, name text)")
-            con.commit()
-
-        def create_table_teams(con):
-            cur = con.cursor()
+        try:
+            self.db = sqlite3.connect('data.db')
+            cur = self.db.cursor()
+            cur.execute("CREATE TABLE IF NOT EXISTS users(user_id integer PRIMARY KEY, name text)")
             cur.execute("""CREATE TABLE IF NOT EXISTS teams(team_id integer PRIMARY KEY, leader_id integer, 
             member_1_id integer, member_2_id integer, member_3_id integer, member_4_id integer, member_5_id integer, 
             member_6_id integer, member_7_id integer, member_8_id integer)""")
-            con.commit()
-
-        try:
-            self.con = sqlite3.connect('data.db')
-            create_table_users(self.con)
-            create_table_teams(self.con)
+            self.db.commit()
         except Error:
             print(Error)
         finally:
-            self.con.close()
+            self.db.close()
 
-    def connect(self):
-        self.con = sqlite3.connect('data.db')
-        return self.con
+    def user_check(self, user_id):
+        try:
+            self.db = sqlite3.connect('data.db')
+            cur = self.db.cursor()
+            info = cur.execute(f"SELECT * FROM users WHERE user_id = {user_id}")
+        except Error:
+            print(Error)
+        finally:
+            self.db.close()
 
-    def close(self):
-        self.con.close()
-        return self.con
+
