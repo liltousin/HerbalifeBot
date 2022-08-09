@@ -41,7 +41,7 @@ def add_user_data(cur: cursorObj, user_id, data):
 @db_connect
 def get_user_name(cur: cursorObj, user_id):
     cur.execute(f'SELECT firstname, lastname FROM users WHERE user_id = {user_id}')
-    lastname, firstname = cur.fetchall()[0]
+    firstname, lastname = cur.fetchall()[0]
     return firstname, lastname
 
 
